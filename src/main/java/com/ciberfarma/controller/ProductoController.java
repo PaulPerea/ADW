@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ciberfarma.model.Productos;
 import com.ciberfarma.repository.ICategoriaRepository;
@@ -33,6 +34,7 @@ public class ProductoController {
 		//model.addAttribute("mensaje","Exito");
 		model.addAttribute("lstCategorias",repoCat.findAll());
 		model.addAttribute("lstProveedor",repoProv.findAll());
+		model.addAttribute("boton","Registrar");
 		//obj de tipo Producto para guardar los datos
 		model.addAttribute("productos", new Productos());
 		return "crudproductos";
@@ -43,6 +45,7 @@ public class ProductoController {
 		//crear obj de repository
 		//enviar un listado para el combo
 		//model.addAttribute("mensaje","Exito");
+		model.addAttribute("boton","Registrar");
 		model.addAttribute("lstCategorias",repoCat.findAll());
 		model.addAttribute("lstProdutos",repoProd.findAll());
 		model.addAttribute("lstProveedor",repoProv.findAll());
@@ -67,6 +70,18 @@ public class ProductoController {
 			model.addAttribute("mensaje","Error al registrar");
 			model.addAttribute("clase","alert alert-danger");
 		}
+		return "crudproductos";
+	}
+	//controlador para buscar un producto a editar
+	@PostMapping("/buscar")
+	public String buscarProducto(@RequestParam(name="id_prod") String id_prod, Model modelo) { //lo guardo asi String id_prod
+		
+		System.out.println(id_prod);
+		
+		modelo.addAttribute("productos", repoProd.findById(id_prod));
+		modelo.addAttribute("lstCategorias",repoCat.findAll());
+		modelo.addAttribute("lstProveedor",repoProv.findAll());
+		modelo.addAttribute("boton","Actualizar");
 		return "crudproductos";
 	}
 	
