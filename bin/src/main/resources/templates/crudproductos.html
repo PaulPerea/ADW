@@ -70,21 +70,28 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">codigo</th>
+					<th scope="col">IdProducto</th>
 					<th scope="col">Descripcion</th>
 					<th scope="col">Stock</th>
 					<th scope="col">Precio</th>
 					<th scope="col">Categoria</th>
-					<th scope="col"></th>
+					<th scope="col">Estado</th>
+					<th scope="col">Proveedor</th>
+					<th scope="col">Prov</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="p : ${lstProdutos}">
 					<th scope="row" th:text="${p.id_prod}"></th>
-					<th th:text="${p.des_prod}"></th>
-					<th th:text="${p.stk_prod}"></th>
-					<th th:text="${p.pre_prod}"></th>
-					<th th:text="${p.objCategoria.descripcion}"></th>
+					<th scope="row" th:text="${p.des_prod}"></th>
+					<th scope="row" th:text="${p.stk_prod}"></th>
+					<th scope="row" th:text="${p.pre_prod}"></th>
+					<th scope="row" th:text="${p.idcategoria}"></th>
+					<th scope="row" th:text="${p.est_prod}"></th>
+					<th scope="row" th:text="${p.idproveedor}"></th>
+				</tr>
+				<tr th:each="a : ${lstCategorias}">
+					<th scope="row" th:text="${a.descripcion}"></th>
 				</tr>
 			</tbody>
 		</table>
