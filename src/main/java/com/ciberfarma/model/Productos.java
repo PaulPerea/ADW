@@ -19,6 +19,7 @@ public class Productos {
 	private int idcategoria;
 	private int est_prod ;
 	private int idproveedor;
+	
 	public String getId_prod() {
 		return id_prod;
 	}
@@ -65,5 +66,9 @@ public class Productos {
 	@ManyToOne
 	@JoinColumn(name="idcategoria", insertable=false, updatable = false)
 	private Categoria objCategoria;
+	
+	@ManyToOne
+	@JoinColumn(name="idproveedor", insertable=false, updatable = false)
+	private Proveedores objProv;
 	
 }

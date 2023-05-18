@@ -10,39 +10,42 @@
 
 	<div class="container">
 		<h1>Mantenimiento de Productos</h1>
-		<form action="" method="POST">
+		<form action="/crud/security/producto/guardar" method="POST" th:object="${productos}">
 
 			<div class="form-group">
-				<label for="inputCod">Código</label> <input type="text"
+				<label for="inputCod">Código</label> <input type="text" th:field="*{id_prod}"
 					class="form-control" id="inputCod" placeholder="Código">
 			</div>
 			<div class="form-group">
-				<label for="inputNom">Nombre</label> <input type="text"
+				<label for="inputNom">Nombre</label> <input type="text" th:field="*{des_prod}"
 					class="form-control" id="inputNom" placeholder="Nombre">
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputStk">Stock</label> <input type="number"
+					<label for="inputStk">Stock</label> <input type="number" th:field="*{stk_prod}"
 						class="form-control" id="inputStk" placeholder="0">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPrec">Precio</label> <input type="number"
+					<label for="inputPrec">Precio</label> <input type="number" th:field="*{pre_prod}"
 						step="0.01" class="form-control" id="inputPrec" placeholder="0.00">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label for="inputCat">Categoría</label> <select id="inputCat"
+					<label for="inputCat">Categoría</label> 
+					<select id="inputCat"  th:field="*{idcategoria}"
 						class="form-control">
 						<option value="-1">Seleccione...</option>
-						<option th:each="c : ${lstCategorias}" th:value="${c.idcategoria}"
-							th:text="${c.descripcion}"></option>
+						<option th:each="c : ${lstCategorias}" 
+							th:value="${c.idcategoria}"
+							th:text="${c.descripcion}"
+							></option>
 
 					</select>
 
 				</div>
 				<div class="form-group col-md-4">
-					<label for="inputEstado">Estado</label> <select id="inputEstado"
+					<label for="inputEstado">Estado</label> <select id="inputEstado"  th:field="*{est_prod}"
 						class="form-control">
 						<option value="-1">Seleccione...</option>
 						<option value="1">Activo</option>
@@ -51,10 +54,11 @@
 					</select>
 				</div>
 				<div class="form-group col-md-4">
-					<label for="inputProv">Proveedor</label> <select id="inputProv"
+					<label for="inputProv">Proveedor</label> <select id="inputProv" th:field="*{idproveedor}"
 						class="form-control">
 						<option value="-1">Seleccione...</option>
-						<option th:each="a : ${lstProveedor}" th:value="${a.idproveedor}"
+						<option th:each="a : ${lstProveedor}" 
+							th:value="${a.idproveedor}"
 							th:text="${a.nombre_rs}"></option>
 
 					</select>
@@ -63,8 +67,9 @@
 
 			<button type="submit" class="btn btn-primary">Registrar</button>
 			<a href="/listado" class="btn btn-primary">Listado</a>
+			<a href="/cargar" class="btn btn-primary">Nuevo</a>
 		</form>
-		<div th:text="${mensaje}"></div>
+		<div th:class="${clase}" th:text="${mensaje}"></div>
 	</div>
 	<div class="container">
 		<table class="table">
@@ -75,7 +80,7 @@
 					<th scope="col">Stock</th>
 					<th scope="col">Precio</th>
 					<th scope="col">Categoria</th>
-					<th scope="col"></th>
+					<th scope="col">Proveedor</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -85,6 +90,15 @@
 					<th th:text="${p.stk_prod}"></th>
 					<th th:text="${p.pre_prod}"></th>
 					<th th:text="${p.objCategoria.descripcion}"></th>
+					<th th:text="${p.objProv.nombre_rs}"></th>
+					<td>
+					
+					<form action="/buscar" method="post">
+						<input type="hidden" name ="id_prod" th:value="${p.id_prod}">
+						<button class = "btn btn-primary">Editar</button>
+					</form>
+					
+					</td>
 				</tr>
 			</tbody>
 		</table>
