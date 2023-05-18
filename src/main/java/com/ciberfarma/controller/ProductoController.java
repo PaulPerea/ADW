@@ -55,7 +55,7 @@ public class ProductoController {
 	
 	//controlador para abrir principal
 	@GetMapping("/")
-	public String abrirPagPrincipal() {
+	public String abrirPagPrincipal() { 
 		return "principal";
 	}
 	//controlador para grabar
